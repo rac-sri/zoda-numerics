@@ -25,7 +25,6 @@ function compute_sizes(; C, lp, lpp, F, Fp, N, rate, n_ratio=1)
     # Size of opening for row of X or column of Y, assuming 2-ary Merkle tree, in
     # bits
     size_opening_X = C*ceil(Int64, log2(m))
-    size_opening_Y = C*ceil(Int64, log2(m)) # XXX: Ignoring for now since this should be very small
 
     # Total size of commitment openings in bits
     total_opening_size = cS*size_opening_X
@@ -59,14 +58,14 @@ end
 # ----- Inputs for calculation -----
 
 # s = []
-for logn in [23, 26, 28, 30, 38, 40]
+for logn in [23, 25, 26, 28, 30, 38, 40]
 # for logn in range(23, 40, length=100)
     smallest_size = Inf
     small_F, small_Fp, small_ratio = Inf, Inf, Inf
     @info "---- N = $(Base.format_bytes(2^logn)) ----"
     # for F in [1, 2, 4, 8, 16, 32]
-    for F in [2, 4, 8, 16, 32]
-        for Fp in [32, 64, 128]
+    for F in [16, 32]
+        for Fp in [128]
             for n_ratio in [1]
                 # Commitment size (in bits), assuming SHA256
                 C = 256
