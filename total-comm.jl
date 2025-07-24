@@ -6,6 +6,7 @@ function n_nodes(n, rate, n_samples, log_prob; m=nothing)
     end
 
     # For now, use simple approximation
+    # ceil(Int, required_symbols / (effective_samples_per_node))
     return ceil(Int, (log_prob + m) / (log(2, 1 / rate) * n_samples))
 end
 
@@ -171,6 +172,19 @@ for N in N_list
     n_samples_kzg_e = ceil(Int, -log_node_soundness / log2(rate_kzg_e))
     println("Per node cost: $(Base.format_bytes((commit_size_kzg_e + n_samples_kzg_e*symbol_size_kzg_e)/8))")
 
+  
+    per_commitment_cost = group_size_kzg  # 384 bits per commitment
+    println("(Internal reference) Per-commitment cost: $(Base.format_bytes(per_commitment_cost/8))")
+
+    # Per-row cost (total commitment size for a row)
+    per_row_cost = group_size_kzg * sidelength_kzg_e  # 384 * sqrt(n_kzg_e) bits per row
+    println("(Internal reference) Per-row cost: $(Base.format_bytes(per_row_cost/8))")
+
+    # Total commitment size to be downloaded
+    total_commitment_size = n_kzg_e * per_commitment_cost  # Total bits for all commitments
+    println("(Internal reference) Total commitment size to download: $(Base.format_bytes(total_commitment_size/8))")
+  
+
     n_nodes_kzg_e, total_comm_kzg_e = total_comm(
         n_kzg_e,
         rate_kzg_e,
@@ -185,6 +199,46 @@ for N in N_list
     println("Total network communication for entrywise KZG: $(Base.format_bytes(total_comm_kzg_e/8))")
     println("Total network overhead for entrywise KZG: $(round(total_comm_kzg_e/N, digits=2))x")
 
+    
+    # --- Row-wise AVAIL KZG ---
+     println("----- Row-wise AVAIL KZG -----")
+
+     n_kzg_e = N/field_size_kzg
+     sidelength_kzg_e = sqrt(n_kzg_e)
+
+     # Trivial decoder requires 
+     rate_kzg_e = 1 / 2
+ 
+     commit_size_kzg_e = group_size_kzg # 2 matrices (X and Y)
+     symbol_size_kzg_e = field_size_kzg + group_size_kzg*2
+ 
+     n_samples_kzg_e = ceil(Int, -log_node_soundness / log2(rate_kzg_e))
+     println("Per node cost: $(Base.format_bytes((commit_size_kzg_e + n_samples_kzg_e*symbol_size_kzg_e)/8))")
+ 
+     println("(Internal reference) Per-commitment cost (row): $(Base.format_bytes(commit_size_kzg_e/8))")
+ 
+     # Total commitment size to be downloaded (for both X and Y matrices)
+     total_commitment_size = sidelength_kzg_e * per_commitment_cost  # 2 matrices * n_kzg_e rows each
+     println("(Internal reference) Total commitment size to download: $(Base.format_bytes(total_commitment_size/8))")
+ 
+  
+     # Number of nodes calculation changes:
+     # Instead of n_kzg_e individual entries, we have sidelength_kzg_e rows
+     n_nodes_kzg_e, total_comm_kzg_e = total_comm(
+         n_kzg_e, 
+         rate_kzg_e,
+         commit_size_kzg_e,
+         symbol_size_kzg_e,
+         n_samples_kzg_e,
+         log_prob;
+         m=n_kzg_e/rate_kzg # this remains n_kzg_e/rate_kzg because we still have to individual element
+     )
+ 
+     println("Number of $(log_node_soundness) bits nodes needed for row-wise KZG: $n_nodes_kzg_e")
+     println("Total network communication for row-wise KZG: $(Base.format_bytes(total_comm_kzg_e/8))")
+     println("Total network overhead for row-wise KZG: $(round(total_comm_kzg_e/N, digits=2))x")
+
+     
     # --- FRIDA ---
     println("----- FRIDA -----")
 
