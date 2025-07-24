@@ -209,8 +209,8 @@ for N in N_list
      # Trivial decoder requires 
      rate_kzg_e = 1 / 2
  
-     commit_size_kzg_e = group_size_kzg # 2 matrices (X and Y)
-     symbol_size_kzg_e = field_size_kzg + group_size_kzg*2
+     commit_size_kzg_e = group_size_kzg * sidelength_kzg_e # only rows
+     symbol_size_kzg_e = field_size_kzg + group_size_kzg
  
      n_samples_kzg_e = ceil(Int, -log_node_soundness / log2(rate_kzg_e))
      println("Per node cost: $(Base.format_bytes((commit_size_kzg_e + n_samples_kzg_e*symbol_size_kzg_e)/8))")
