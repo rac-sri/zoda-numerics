@@ -8,36 +8,36 @@ This repository contains analysis and comparison of different distributed proof 
 | ------------- | --------- | ---------------- | ------------- | --------- | ------------- | ------------------ | ------------- |
 | **32 MiB**    |           |                  |               |           |               |                    |               |
 | Nodes         | 16        | 61               | 197           | 22        | 17,455        | 17,477             | 35,546        |
-| Per-node Cost | 8.67 MiB  | 1.24 MiB         | 572 KiB       | 12.34 MiB | 96.5 KiB      | 46.7 KiB           | 799 KiB       |
-| Network Comm  | 138.7 MiB | 75.3 MiB         | 110.1 MiB     | 271.4 MiB | 1.61 GiB      | 796.9 MiB          | 27.08 GiB     |
-| Overhead      | 4.34x     | 2.35x            | 3.44x         | 8.48x     | 51.39x        | 24.9x              | 866.66x       |
+| Per-node Cost | 8.67 MiB  | 1.24 MiB         | 572 KiB       | 12.34 MiB | 96.5 KiB      | 40.0 KiB           | 799 KiB       |
+| Network Comm  | 138.7 MiB | 75.3 MiB         | 110.1 MiB     | 271.4 MiB | 1.61 GiB      | 682.2 MiB          | 27.08 GiB     |
+| Overhead      | 4.34x     | 2.35x            | 3.44x         | 8.48x     | 51.39x        | 21.32x             | 866.66x       |
 | **256 MiB**   |           |                  |               |           |               |                    |               |
 | Nodes         | 43        | 170              | 556           | 60        | 139,633       | 139,811            | 284,360       |
-| Per-node Cost | 24.28 MiB | 3.35 MiB         | 1.48 MiB      | 34.86 MiB | 239.8 KiB     | 118.4 KiB          | 1.01 MiB      |
-| Network Comm  | 1.02 GiB  | 570.3 MiB        | 824.6 MiB     | 2.04 GiB  | 31.93 GiB     | 15.78 GiB          | 272.7 GiB     |
-| Overhead      | 4.08x     | 2.23x            | 3.22x         | 8.17x     | 127.73x       | 63.12x             | 1090.64x      |
+| Per-node Cost | 24.28 MiB | 3.35 MiB         | 1.48 MiB      | 34.86 MiB | 239.8 KiB     | 111.6 KiB          | 1.01 MiB      |
+| Network Comm  | 1.02 GiB  | 570.3 MiB        | 824.6 MiB     | 2.04 GiB  | 31.93 GiB     | 14.88 GiB          | 272.7 GiB     |
+| Overhead      | 4.08x     | 2.23x            | 3.22x         | 8.17x     | 127.73x       | 59.54x             | 1090.64x      |
 | **1 GiB**     |           |                  |               |           |               |                    |               |
 | Nodes         | 86        | 340              | 1,111         | 119       | 558,528       | 559,242            | 1,137,439     |
-| Per-node Cost | 48.42 MiB | 6.63 MiB         | 2.91 MiB      | 69.72 MiB | 461.5 KiB     | 229.2 KiB          | 1.10 MiB      |
-| Network Comm  | 4.07 GiB  | 2.20 GiB         | 3.16 GiB      | 8.10 GiB  | 245.8 GiB     | 122.2 GiB          | 1.19 TiB      |
-| Overhead      | 4.07x     | 2.20x            | 3.16x         | 8.10x     | 245.82x       | 122.24x            | 1218.73x      |
+| Per-node Cost | 48.42 MiB | 6.63 MiB         | 2.91 MiB      | 69.72 MiB | 461.5 KiB     | 222.5 KiB          | 1.10 MiB      |
+| Network Comm  | 4.07 GiB  | 2.20 GiB         | 3.16 GiB      | 8.10 GiB  | 245.8 GiB     | 118.7 GiB          | 1.19 TiB      |
+| Overhead      | 4.07x     | 2.20x            | 3.16x         | 8.10x     | 245.82x       | 118.66x            | 1218.73x      |
 | **32 GiB**    |           |                  |               |           |               |                    |               |
 | Nodes         | 481       | 1,922            | 6,284         | 670       | 17,872,857    | 17,895,698         | 36,398,029    |
 | Per-node Cost | 273.1 MiB | 37.06 MiB        | 16.16 MiB     | 394.4 MiB | 2.47 MiB      | 1.23 MiB           | 1.47 MiB      |
-| Network Comm  | 128.3 GiB | 69.55 GiB        | 99.17 GiB     | 258.0 GiB | 42.05 TiB     | 21.03 TiB          | 51.09 TiB     |
-| Overhead      | 4.01x     | 2.17x            | 3.10x         | 8.06x     | 1345.68x      | 672.87x            | 1634.83x      |
+| Network Comm  | 128.3 GiB | 69.55 GiB        | 99.17 GiB     | 258.0 GiB | 42.05 TiB     | 20.92 TiB          | 51.09 TiB     |
+| Overhead      | 4.01x     | 2.17x            | 3.10x         | 8.06x     | 1345.68x      | 669.29x            | 1634.83x      |
 | **1 TiB**     |           |                  |               |           |               |                    |               |
 | Nodes         | 2,717     | 10,867           | 35,546        | 3,785     | 571,931,398   | 572,662,307        | 1,164,736,894 |
-| Per-node Cost | 1.51 GiB  | 209.1 MiB        | 91.08 MiB     | 2.18 GiB  | 13.87 MiB     | 6.94 MiB           | 1.93 MiB      |
+| Per-node Cost | 1.51 GiB  | 209.1 MiB        | 91.08 MiB     | 2.18 GiB  | 13.87 MiB     | 6.93 MiB           | 1.93 MiB      |
 | Network Comm  | 4.00 TiB  | 2.17 TiB         | 3.09 TiB      | 8.05 TiB  | 7.39 PiB      | 3.70 PiB           | 2.10 PiB      |
-| Overhead      | 4.00x     | 2.17x            | 3.09x         | 8.05x     | 7567.42x      | 3787.72x           | 2146.92x      |
+| Overhead      | 4.00x     | 2.17x            | 3.09x         | 8.05x     | 7567.42x      | 3784.14x           | 2146.92x      |
 
 ## Key Findings
 
 ### Best Performance
 
 - **ZODA (Field Extension)** consistently achieves the lowest overhead (2.17-2.35x)
-- **Row-wise AVAIL KZG** shows significant improvement over entrywise approach (24.9-3787x vs 51-7567x overhead)
+- **Row-wise AVAIL KZG** shows significant improvement over entrywise approach (21.32-3784x vs 51-7567x overhead)
 
 ### Scalability Issues
 
